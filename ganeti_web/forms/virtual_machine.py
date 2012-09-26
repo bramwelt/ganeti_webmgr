@@ -34,7 +34,6 @@ from ganeti_web.backend.queries import (cluster_qs_for_user,
                                         owner_qs_for_cluster)
 from ganeti_web.backend.templates import template_to_instance
 from ganeti_web.caps import has_cdrom2, requires_maxmem, has_sharedfile
-
 from ganeti_web.constants import (EMPTY_CHOICE_FIELD, HV_DISK_TEMPLATES,
                                   HV_NIC_MODES, KVM_CHOICES, HV_USB_MICE,
                                   HV_SECURITY_MODELS, KVM_FLAGS,
