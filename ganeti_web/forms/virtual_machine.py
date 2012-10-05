@@ -659,7 +659,10 @@ class VMWizardBasicsForm(Form):
         prettified = [hv_prettify(hv) for hv in hvs]
         hv = cluster.info["default_hypervisor"]
         self.fields["hv"].choices = zip(hvs, prettified)
-        self.fields["hv"].initial = hv
+        self.fields["hv"].initial = hv  
+
+        if has_sharedfile(cluster):
+            self.fields["disk_template"].choices += [("sharedfile", "Sharedfile")]
 
         # Get the OS list.
         self.fields["os"].choices = cluster_os_list(cluster)
