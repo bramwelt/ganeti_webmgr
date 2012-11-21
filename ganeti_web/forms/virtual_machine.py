@@ -638,6 +638,7 @@ class VMWizardBasicsForm(Form):
     os = ChoiceField(label=_('Operating System'), choices=[])
     vcpus = IntegerField(label=_("Virtual CPU Count"), initial=1, min_value=1)
     memory = DataVolumeField(label=_('Memory (MiB)'))
+    minmem = DataVolumeField(label=('Minimum RAM (MiB'))
     disk_template = ChoiceField(label=_('Disk Template'),
                                 choices=HV_DISK_TEMPLATES)
     disk_size = DataVolumeField(label=_("Disk Size (MB)"))
@@ -666,9 +667,12 @@ class VMWizardBasicsForm(Form):
         # If this cluster operates on the "maxmem" parameter instead of
         # "memory", use that for now.
         if requires_maxmem(cluster):
+            self.fields["memory"].label = "Maximum RAM (MiB)"
             self.fields["memory"].initial = beparams["maxmem"]
+            self.fields["minmem"].initial = beparams["minmem"]
         else:
             self.fields["memory"].initial = beparams["memory"]
+            del self.fields["minmem"]
 
         # If there are ipolicy limits in place, add validators for them.
         if "ipolicy" in cluster.info:
