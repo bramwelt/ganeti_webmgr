@@ -600,11 +600,6 @@ class VMWizardOwnerForm(Form):
         qs = owner_qs_for_cluster(cluster)
         self.fields["owner"].queryset = qs
 
-        if has_sharedfile(cluster):
-            self.fields["disk_template"].choices += ((u'sharedfile', u'Sharedfile'),)
-
-        self.fields["os"].choices = cluster_os_list(cluster)
-
     def _configure_for_template(self, template):
         if not template:
             return
